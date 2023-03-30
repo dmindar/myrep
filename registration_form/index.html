@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="build/css/intlTelInput.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="register">
+            <div class="create_user">
+                <img src="img/user.png" alt="Create User" class="userLogo">
+
+                <h1 class="setUpHeader">Set up your account</h1>
+
+                <form id="form" action="">
+
+                    <label for="username">Name</label>
+                    <input type="text" class="input js-input" id="username" placeholder="First and last name">
+
+
+                    <label for="login">Username</label>
+                    <input type="text" class="input js-input" id="login" placeholder="Choose a username" "
+                    title=" Only A-z">
+
+                    <label for="email">Email</label>
+                    <input type="text" class="input js-input" id="email" placeholder="Please enter an active email" ">
+                    
+                    <label for=" phone_number">Number</label>
+                    <input type="tel" class="input js-input" id="phone" placeholder="Mobile Number (+...)" value="+7">
+
+                    <label class="labelPass" for="form-pass">Password</label>
+                    <input type="password" id="form-pass" class="input js-input create-pass"
+                        placeholder="Please use a strong password">
+                    <span class="pass-icon" id="pass-icon"><img src="img/eye.png"
+                            style="width: 20px;height: 20px;"></span>
+
+
+                    <label for="conf-pass">Confirm Password</label>
+                    <input type="password" class="input js-input" id="conf-pass"
+                        placeholder="Please type again your password">
+                    <span class="confirm-pass-icon" id="confirm-pass-icon"><img src="img/eye.png"
+                            style="width: 20px;height: 20px;"></span>
+
+                    <input type="checkbox" id="clickCheckBox" class="checkbox_input js-input confirm"><label
+                        class="checkbox__label"> Accept the privacy policy</label> <br>
+
+
+                    <button type="submit" class="button" " ><span>Sign Up</span></button>  
+
+                    
+
+                </form>
+            </div>
+            <p class=" haveAcc">Already have an account ?<a href="#"> Sign in</a></p>
+
+
+            </div>
+        </div>
+
+        <script src="build/js/intlTelInput.js"></script>
+        <script type="text/javascript" src="js.js"></script>
+        <script src=" https://unpkg.com/sweetalert/dist/sweetalert.min.js "> </script>
+
+</body>
+
+</html>
