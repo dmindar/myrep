@@ -1,191 +1,156 @@
-let input = document.querySelector("#phone");
-window.intlTelInput(input, {});
+const form = document.getElementById('form');
+const login = document.getElementById('login');
+const username = document.getElementById('username');
+const phone = document.getElementById('number');
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const password2 = document.getElementById('password2');
+const checkbox = document.getElementById("clickCheckBox");
+const label = document.getElementById("cb__label");
+const iconPass = document.getElementById("pass-icon");
+const iconConf = document.getElementById("confirm-pass-icon");
 
-const inputPass = document.
-getElementById("form-pass");
-
-const iconPass = document.
-getElementById("pass-icon");
 
 iconPass.addEventListener("click", () => {
-    if (inputPass.getAttribute("type") ===
+    if (password.getAttribute("type") ===
         "password") {
-        inputPass.setAttribute("type", "text");
+        password.setAttribute("type", "text");
     } else {
-        inputPass.setAttribute("type",
+        password.setAttribute("type",
             "password");
     }
 });
 
-const inputConf = document.
-getElementById("conf-pass");
-const iconConf = document.
-getElementById("confirm-pass-icon");
-
 iconConf.addEventListener("click", () => {
-    if (inputConf.getAttribute("type") ===
+    if (password2.getAttribute("type") ===
         "password") {
-        inputConf.setAttribute("type", "text");
+        password2.setAttribute("type", "text");
     } else {
-        inputConf.setAttribute("type",
+        password2.setAttribute("type",
             "password");
     }
 })
 
 
+form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    validateInputs();
+});
 
 
-let form = document.getElementById("form"),
-    formInputs = document.querySelectorAll(".js-input"),
-    inputName = document.getElementById("username"),
-    inputLogin = document.getElementById("login"),
-    inputEmail = document.getElementById("email"),
-    inputPhone = document.getElementById("phone"),
-    inputCheckbox = document.getElementById("clickCheckBox");
-inputPassword = document.getElementById("form-pass");
-inputConfPass = document.getElementById("conf-pass");
+const setError = (element, message) => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector('.error');
 
-
-
-
-
-function validateName(name) {
-    let re = /[A-Z][a-z]/;
-    return re.test(String(name));
+    errorDisplay.innerText = message;
+    inputControl.classList.add('error');
+    inputControl.classList.remove('success')
 }
 
-function validateLogin(login) {
-    let re = /^[A-Za-z][A-Za-z0-9_]{4,14}$/;
+const setSuccess = element => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector('.error');
+
+    errorDisplay.innerText = '';
+    inputControl.classList.add('success');
+    inputControl.classList.remove('error');
+};
+
+const validateName = username => {
+    const re = /[A-Z][a-z]/;
+    return re.test(String(username));
+}
+
+
+const validateLogin = login => {
+    const re = /^[A-Za-z][A-Za-z0-9_]{4,14}$/;
     return re.test(String(login));
-
 }
 
-function validateEmail(email) {
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const validateEmail = email => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
 
-function validatePhone(phone) {
-    let re = /^[0-9\-\+]{9,15}$/;
+const isValidPhone = phone => {
+    const re = /^[0-9\-\+]{9,15}$/;
     return re.test(String(phone));
 }
 
+const validateInputs = () => {
+    const usernameValue = username.value.trim();
+    const loginValue = login.value.trim();
+    const emailValue = email.value.trim();
+    const phoneValue = phone.value.trim();
+    const passwordValue = password.value.trim();
+    const password2Value = password2.value.trim();
 
-function validatePass(pass) {
-    let re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-    return re.test(String(pass));
-}
-
-
-form.onsubmit = function () {
-    let nameVal = inputName.value,
-        loginVal = inputLogin.value,
-        passVal = inputPassword.value,
-        emailVal = inputEmail.value,
-        phoneVal = inputPhone.value,
-        emptyInput = Array.from(formInputs).filter(input => input.value === '')
-
-
-    formInputs.forEach(function (input) {
-        if (input.value === "") {
-            input.classList.add('error');
-
-        } else {
-            input.classList.remove('error');
-        }
-    })
-
-
-
-    if (emptyInput.length !== 0) {
-        console.log('inputs not filled');
-        return false;
-    }
-    let massages = []
-    if (!validateName(nameVal)) {
-        inputName.classList.add('error');
-        console.log('name not valid');
-        swal(" Ошибка имени", "Имя должно начинаться с заглавной и содержать только латинские буквы.", "warning");
-        return false;
+    if (usernameValue === '') {
+        setError(username, 'Username is required');
+    } else if (!validateName(usernameValue)) {
+        setError(username, 'Provide a real name  (The name must begin with a capital. Latin letters only.)');
     } else {
-        inputName.classList.remove('error');
-        inputName.classList.add('done');
+        setSuccess(username);
     }
 
-    if (!validateLogin(loginVal)) {
-        console.log('login is not valid');
-        inputLogin.classList.add('error');
-        swal(" Ошибка создания логина ", 'Количество символов должно быть от 5 до 15. Строка должна содержать только латинские буквы и цифровые символы и/или символы подчеркивания (_). Первый символ строки должен быть буквенным.', "warning");
-        return false;
+    if (loginValue === '') {
+        setError(login, 'Login is required');
+    } else if (!validateLogin(loginValue)) {
+        setError(login, 'Provide a valid login(The number of characters is from 5 to 15. Latin letters only. The first character of the string must be alphabetic.');
     } else {
-        inputLogin.classList.remove('error');
-        inputLogin.classList.add('done');
+        setSuccess(login);
     }
 
-    if (!validateEmail(emailVal)) {
-        console.log('email not valid');
-        inputEmail.classList.add('error');
-        swal("Пожалуйста, введите коректный email адрес");
-        return false;
+    if (emailValue === '') {
+        setError(email, 'Email is required');
+    } else if (!validateEmail(emailValue)) {
+        setError(email, 'Provide a valid email address');
     } else {
-        inputEmail.classList.remove('error');
-        inputEmail.classList.add('done');
+        setSuccess(email);
     }
 
-    if (!validatePhone(phoneVal)) {
-        console.log('number phone not valid');
-        inputPhone.classList.add('error');
-        swal("Номер должен содержать только цифры и код страны.");
-        return false;
+    if (phoneValue === '') {
+        setError(phone, 'Number is required');
+    } else if (!isValidPhone(phoneValue)) {
+        setError(phone, 'Provide a valid phone number (The number must contain only numbers and the country code.)');
     } else {
-        inputPhone.classList.remove('error');
-        inputPhone.classList.add('done');
+        setSuccess(phone);
     }
 
-
-    if (!inputCheckbox.checked) {
-        console.log('cheackbox not checked');
-        inputCheckbox.classList.add('error');
-        swal("Пожалуйста прочтите и приймите политику конфиденциальности");
-        return false;
+    if (passwordValue === '') {
+        setError(password, 'Password is required');
+    } else if (passwordValue.length < 8) {
+        setError(password, 'The password must contain at least 8 characters. Contain at least 1 number. The password must contain at least 1 upper case character (AZ).')
     } else {
-        inputCheckbox.classList.remove('error');
-        inputCheckbox.classList.add('done')
-
+        setSuccess(password);
     }
 
-    if (!validatePass(passVal)) {
-        console.log('pass is not correct');
-        inputPassword.classList.add('error');
-        swal(" Ошибка создания пароля", "Пароль должен содержать не менее 8 символов. Cодержать не менее 1 числа. Cодержать хотя бы 1 символ нижнего регистра (az). Cодержать хотя бы 1 символ верхнего регистра (AZ).", "warning");
-        return false;
+    if (password2Value === '') {
+        setError(password2, 'Please confirm your password');
+    } else if (password2Value !== passwordValue) {
+        setError(password2, "Passwords doesn't match");
+
     } else {
-        inputPassword.classList.remove('error');
+        setSuccess(password2);
     }
 
-
-
-    if (document.getElementById("form-pass").value == document.getElementById("conf-pass").value) {
-        inputConfPass.classList.add('done');
-        inputPassword.classList.add('done');
-        console.log("Name:" + nameVal);
-        console.log("Login:" + loginVal);
-        console.log("Email:" + emailVal);
-        console.log("Phone Number:" + phoneVal);
-        console.log("Password:" + passVal);
+    if (!checkbox.checked) {
+        label.classList.add('error');
+    } else if ((!validateName(usernameValue)),
+        (!validateLogin(loginValue)),
+        (!validateEmail(emailValue)),
+        (!validateEmail(emailValue)),
+        (!isValidPhone(phoneValue)),
+        (password2Value === passwordValue)) {} else {
+        label.classList.remove('error');
+        label.classList.add('done');
         swal("Поздравляю", "Вы успешно создали аккаунт");
-
-    } else {
-        console.log('Passwords dont match');
-        inputPassword.classList.add('error');
-        inputConfPass.classList.add('error');
-        swal(" Ошибка подтверждения пароля", "Пароли не совпадают. Пожалуйста подтвердите пароль.", "warning");
-
-        return false;
-
+        console.log("Name:" + usernameValue);
+        console.log("Login:" + loginValue);
+        console.log("Email:" + emailValue);
+        console.log("Phone Number:" + phoneValue);
+        console.log("Password:" + passwordValue);
 
     }
-
-
-    return false;
-}
+};

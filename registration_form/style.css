@@ -6,21 +6,6 @@
     font-family: 'Open Sans', sans-serif;
 }
 
-.container {
-    width: 100%;
-    height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(img/background_img.jpg);
-    background-position: center;
-    background-size: cover;
-
-}
-
-label:not(.checkbox__label) {
-    font-size: 10px;
-    color: whitesmoke;
-
-}
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -38,20 +23,13 @@ select:-webkit-autofill:focus {
 
 
 
-
-
-.register {
-    width: 500px;
-    height: 640px;
-    background-color: #242436;
-    color: #7F7F7F;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    padding: 87px 85px 80px;
-
+body {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(img/background_img.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .userLogo {
@@ -65,120 +43,43 @@ select:-webkit-autofill:focus {
     box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.627);
 }
 
-h1.setUpHeader {
+#form {
+    width: 500px;
+    height: 680px;
+    background-color: #242436eb;
+    color: whitesmoke;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 87px 85px 80px;
+    
+}
+
+.label_input{
+    font-size: 10px;
+    color: whitesmoke;
+    margin-top: 12px;
+}
+
+
+#form h1 {
     text-align: center;
     padding: 0 0 7px;
     font-size: 24px;
     font-weight: bold;
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.627);
     color: whitesmoke;
-
-}
-
-.checkbox__label {
-    font-size: 13px;
-}
-
-.create_user input[type="password"],
-input[type="text"],
-input[type="tel"] {
-    border: none;
-    outline: none;
-    background: transparent;
-    /* border-bottom: 1px solid #fff; */
-    color: #fff;
-    height: 36px;
-    font-size: 13px;
-}
-
-.create_user input[type="password"]:hover,
-input[type="text"]:hover,
-input[type="tel"]:hover {
-    color: white;
-    background-color: #1e1e1e;
-}
-
-.create_user input:not(.confirm):not(.continue-btn) {
-    width: 100%;
-    margin-bottom: 6px;
-    border-bottom: 1px solid #494949;
-
-}
-
-.create_user input:not(.confirm):not(.continue-btn):hover {
-    width: 100%;
-    margin-bottom: 6px;
-    border-bottom: 2px solid #494949;
-
-}
-
-.create_user input[type="password"]:hover,
-input[type="text"]:hover,
-input[type="tel"]:hover {
-    background-color: #242436;
-}
-
-
-.create-pass {
-    margin-top: 6px;
-}
-
-.continue-btn {
-
-    margin-top: 20px;
-    width: 150px;
-    height: 40px;
-    left: 824px;
-    top: 820px;
-    border-radius: 5px;
-    background-color: #4B72C2;
-    color: #fff;
-
-}
-
-.continue-btn:hover {
-    background-color: gray;
-}
-
-.continue-btn :active {
-    color: red;
-}
-
-#form input:not(#phone) {
-    padding: 10px;
-}
-
-#phone {
-    padding: 10px 150px 10px 47px;
-}
-
-.checkbox_input {
-    margin: 20px 0 5px;
-}
-
-
-.haveAcc {
-    color: #7F7F7F;
-    font-size: 10px;
-    margin-top: 11px;
-    text-align: center;
-}
-
-.haveAcc a {
-    color: #4B72C2;
-    text-decoration: none;
 }
 
 .button {
     margin-top: 17px;
     margin-bottom: 5px;
-
-    background-color: #f4511e;
     border: none;
-    color: #FFFFFF;
     text-align: center;
     transition: all 0.5s;
-    cursor: pointer;
+ 
     width: 100%;
     height: 33px;
     left: 824px;
@@ -216,57 +117,127 @@ input[type="tel"]:hover {
     right: 0;
 }
 
+.input-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-control input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    height: 36px;
+    font-size: 13px;
+    width: 100%;
+    border-bottom: 1px solid #494949
+}
+
+
+.input-control input:focus {
+    outline: 0;
+}
+
+.input-control.success input {
+    border-color: #09c372;
+}
+
+.input-control.error input {
+    border-color: #ff3860;
+}
+
+.input-control .error {
+    color: #ff3860;
+    font-size: 9px;
+    height: 13px;
+}
+
+.checkbox_input{
+    display: none;
+}
+
+.checkbox_input:checked + .checkbox_label::after {
+    transform: scale(1);
+}
+
+.checkbox_label{
+    font-size: 14px;
+    line-height: 140%;
+    width: 200px;
+    color: #7F7F7F;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox_label::before {
+    content: "";
+    align-self: flex-start;
+    flex: 0 0 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    margin: 0px 10px 0px 0px;
+
+}
+
+.checkbox_label::after {
+    transition: transform 0.5s ease 0s;
+    content: "";
+    width: 13px;
+    height: 12px;
+    position: absolute;
+    top: 2px;
+    left: 1px;
+    background-color: #334976;
+    border-radius: 3px;
+    transform: scale(0);
+}
+
+
+
+
+
+.checkbox_label.error{
+    color: #ff3860;
+}
+
+.checkbox_label.done{
+    color: #09c372;
+}
+
 .pass-icon {
     position: absolute;
     right: 90px;
-    top: 65%;
+    top: 67.5%;
     cursor: pointer;
 }
 
 .confirm-pass-icon {
     position: absolute;
     right: 90px;
-    top: 74.5%;
+    top: 78.5%;
     cursor: pointer;
 }
 
 
-.input.error {
-    border-bottom: 2px solid rgb(197, 0, 0) !important;
+.haveAcc {
+    color: #7F7F7F;
+    font-size: 10px;
+    margin-top: 5px;
+    text-align: center;
 }
 
-.checkbox_input.error+.checkbox__label {
-    color: rgb(200, 0, 0);
-}
-
-#form-pass.error {
-    border-bottom: 1px solid red;
-}
-
-#conf-pass.error {
-    border-bottom: 1px solid red;
-}
-
-.input.done {
-    border-bottom: 1px solid rgb(124, 255, 157) !important;
-}
-
-.checkbox_input.done+.c {
-    color: rgb(124, 255, 157);
-}
-
-#form-pass.done {
-    border-bottom: 1px solid rgb(124, 255, 157);
-}
-
-#conf-pass.done {
-    border-bottom: 1px solid rgb(124, 255, 157);
+.haveAcc a {
+    color: #4B72C2;
+    text-decoration: none;
 }
 
 .swal-modal {
-    color: whitesmoke;
     background-color: #242436;
     border: 1px solid #494949;
+    
 }
 
 .swal-text {
@@ -285,12 +256,4 @@ input[type="tel"]:hover {
     box-shadow: 0px 1px 1px #494949;
     margin-bottom: 20px;
     font-weight: 500;
-}
-
-.swal-button {
-    padding: 7px 19px;
-    border-radius: 2px;
-    background-color: #334976;
-    font-size: 12px;
-
 }
