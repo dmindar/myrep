@@ -73,7 +73,7 @@ const validateEmail = email => {
     return re.test(String(email).toLowerCase());
 }
 
-const isValidPhone = phone => {
+const validatePhone = phone => {
     const re = /^[0-9\-\+]{9,15}$/;
     return re.test(String(phone));
 }
@@ -112,7 +112,7 @@ const validateInputs = () => {
 
     if (phoneValue === '') {
         setError(phone, 'Number is required');
-    } else if (!isValidPhone(phoneValue)) {
+    } else if (!validatePhone(phoneValue)) {
         setError(phone, 'Provide a valid phone number (The number must contain only numbers and the country code.)');
     } else {
         setSuccess(phone);
@@ -126,31 +126,44 @@ const validateInputs = () => {
         setSuccess(password);
     }
 
+
+
     if (password2Value === '') {
         setError(password2, 'Please confirm your password');
     } else if (password2Value !== passwordValue) {
         setError(password2, "Passwords doesn't match");
-
     } else {
         setSuccess(password2);
+
     }
 
     if (!checkbox.checked) {
         label.classList.add('error');
-    } else if ((!validateName(usernameValue)),
-        (!validateLogin(loginValue)),
-        (!validateEmail(emailValue)),
-        (!validateEmail(emailValue)),
-        (!isValidPhone(phoneValue)),
-        (password2Value === passwordValue)) {} else {
+    } else {
         label.classList.remove('error');
         label.classList.add('done');
+
+
+    }
+
+    if (!validateName(usernameValue) ||
+        !validateLogin(loginValue) ||
+        !validateEmail(emailValue) ||
+        !validatePhone(phoneValue) ||
+        password2Value === '' || password2Value !==
+        passwordValue ||
+        !checkbox.checked)
+    {
+        return false;
+        console.log("not valid")
+    } else {
         swal("Поздравляю", "Вы успешно создали аккаунт");
         console.log("Name:" + usernameValue);
         console.log("Login:" + loginValue);
         console.log("Email:" + emailValue);
         console.log("Phone Number:" + phoneValue);
         console.log("Password:" + passwordValue);
-
     }
+
+
 };
